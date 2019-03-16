@@ -1,0 +1,26 @@
+<script src="./web-remote-control.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.4.js"></script>
+<script>
+
+    var wrc = require('web-remote-control');
+    var controller = wrc.createController({ proxyUrl: 'http://singtube.metalhead.kr' });
+
+    controller.connection.socket.on('connect', function() {
+        controller.on('register', function() {
+            controller.ping(function(t) {
+                console.log('pinged: ', t);
+            })
+            controller.command('do this!!!');
+            controller.on('status', function(status) {
+                console.log('Controller: Toy said: ', status);
+            })
+        });
+    });
+</script>
+
+<input type="button" id="button1" onclick="button1_click();" value="버튼1" />
+<script>
+function button1_click() {
+    controller.command('button clicked!');
+}
+</script>
