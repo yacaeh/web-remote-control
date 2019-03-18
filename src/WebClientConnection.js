@@ -54,7 +54,7 @@ WebClientConnection.prototype.createProxySocket = function (address, port) {
     var self = this;
     this.remoteAddress = address;
     this.remotePort = port;
-
+    window.io = require('soket.io-client');
     this.socket = window.io(address + ':' + port);
     this.socket.on('connect', function() {
         console.log('connected');
